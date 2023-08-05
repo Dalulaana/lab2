@@ -1,4 +1,7 @@
 package com.company;
+
+import java.util.Collection;
+
 public class DMyArrayList<T> implements MyList<T>
 {
     private Object[] arr;
@@ -49,6 +52,31 @@ public class DMyArrayList<T> implements MyList<T>
             System.out.println("Index does not exist");
         }
     }
+
+    public void addAll(Collection<? extends T> collection)
+    {
+        addAll(size, collection);
+    }
+
+    public void addAll(int index, Collection<? extends T> collection)
+    {
+        checkIndex(index);
+
+        int addNum=collection.size();
+
+        for (int i=size-1; i>=index; i--)
+        {
+            arr[i+addNum]=arr[i];
+        }
+
+        int i=index;
+        for (T item : collection)
+        {
+            arr[i++]=item;
+        }
+
+    }
+
     @Override
     public boolean remove(T item) {
         int index=0;
